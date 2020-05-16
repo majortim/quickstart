@@ -17,17 +17,17 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 public class MySQLDataSource {
 	@Autowired
-    Environment environment;
+    Environment env;
 
 	@Bean
 	public DataSource dataSource() {
 		HikariConfig hikariConfig = new HikariConfig();
 
-		hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		hikariConfig.setJdbcUrl("jdbc:mysql://newuser@localhost:3306?serverTimezone=UTC");
+		hikariConfig.setDriverClassName(env.getProperty("driver.class"));
+		hikariConfig.setJdbcUrl(env.getProperty("jdbc.url"));
 
-		hikariConfig.setUsername("newuser");
-		hikariConfig.setPassword("newuser#@!");
+		hikariConfig.setUsername(env.getProperty("username"));
+		hikariConfig.setPassword(env.getProperty("password"));
 
 		HikariDataSource dataSource = new HikariDataSource(hikariConfig);
 
