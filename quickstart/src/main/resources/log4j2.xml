@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<Configuration status="WARN">
+<Configuration status="INFO">
   <Appenders>
     <Console name="Console" target="SYSTEM_OUT">
       <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
@@ -41,11 +41,11 @@
 		<AppenderRef ref="Console"/>
 	</Logger> -->
 	
-	<Logger name="com.wdd" level="DEBUG" additivity="false">
+	<Logger name="io.github.majortim.quickstart" level="DEBUG" additivity="false">
 		<AppenderRef ref="Console"/>
 	</Logger>
 	
-    <Root level="info">
+    <Root level="ERROR">
       <AppenderRef ref="Console"/>
     </Root>
 </Loggers>

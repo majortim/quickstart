@@ -8,7 +8,7 @@
 		SELECT 
 		    user_id, user_pw
 		FROM
-		    study.user_info
+		    user_info
 		WHERE user_id = #{userId}
 	</select>
 	
@@ -16,7 +16,7 @@
 		SELECT 
 		    user_id, user_pw
 		FROM
-		    study.user_info
+		    user_info
 	</select>
 
 </mapper>

@@ -16,9 +16,11 @@ public class ServletConfig implements WebMvcConfigurer {
   public void configureViewResolvers(ViewResolverRegistry registry) {
 
     InternalResourceViewResolver bean = new InternalResourceViewResolver();
+    
     bean.setViewClass(JstlView.class);
     bean.setPrefix("/WEB-INF/views/");
     bean.setSuffix(".jsp");
+    
     registry.viewResolver(bean);
   }
 

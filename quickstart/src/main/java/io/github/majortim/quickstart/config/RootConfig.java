@@ -5,16 +5,11 @@ import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 //@ComponentScan
@@ -22,36 +17,23 @@ import com.zaxxer.hikari.HikariDataSource;
 @MapperScan("io.github.majortim.quickstart.mapper")
 public class RootConfig {
 
-	private final Logger logger = LoggerFactory.getLogger(getClass());
+//	private final Logger logger = LoggerFactory.getLogger(getClass());
 
+	@Autowired
+	DataSource dataSource;
 
-	@Bean
-	public DataSource dataSource() {
-		HikariConfig hikariConfig = new HikariConfig();
-
-		logger.debug("datasource");
-
-		hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		hikariConfig.setJdbcUrl("jdbc:mysql://newuser@localhost:3306?serverTimezone=UTC");
-
-		logger.debug("set");
-
-		hikariConfig.setUsername("newuser");
-		hikariConfig.setPassword("newuser#@!");
-
-		HikariDataSource dataSource = new HikariDataSource(hikariConfig);
-
-		return dataSource;
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 	@Bean
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
 		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		Resource resource = resolver.getResource("classpath:/mybatis/mybatis-configuration.xml");
-		sqlSessionFactory.setMapperLocations(resolver.getResource("classpath:/mybatis/mapper/*.xml"));
-		sqlSessionFactory.setDataSource(dataSource());
-		sqlSessionFactory.setConfigLocation(resource);
+		
+		sqlSessionFactory.setDataSource(dataSource);
+		sqlSessionFactory.setConfigLocation(resolver.getResource("classpath:/mybatis/mybatis-configuration.xml"));
+		sqlSessionFactory.setMapperLocations(resolver.getResources("classpath:/mybatis/mapper/*.xml"));
 		
 		return (SqlSessionFactory) sqlSessionFactory.getObject();
 	}
