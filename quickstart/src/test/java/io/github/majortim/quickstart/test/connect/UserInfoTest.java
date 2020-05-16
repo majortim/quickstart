@@ -2,10 +2,9 @@ package io.github.majortim.quickstart.test.connect;
 
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.sql.DataSource;
-
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,25 +14,27 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import io.github.majortim.quickstart.config.RootConfig;
+import io.github.majortim.quickstart.service.UserInfoService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {
 		RootConfig.class
 })
-public class DataSourceTest {
+public class UserInfoTest {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
-	private DataSource dataSource;
-	@Autowired
-	private SqlSessionFactory factory;
+	private UserInfoService userInfoService;
 	
 	@Test
 	public void connectTest() throws SQLException {
-		logger.info("dataSource: " + dataSource);
-		logger.info("connection: " + dataSource.getConnection());
-		logger.info("factory: " + factory);
+		Map<String, Object> param = new HashMap<>();
+		
+		param.put("userId", "test");
+		
+		logger.info("userInfoService: {}", userInfoService.getUserInfo(param));
+		logger.info("userInfoService: {}", userInfoService.getUserInfoList());
 		
 	}
 }
