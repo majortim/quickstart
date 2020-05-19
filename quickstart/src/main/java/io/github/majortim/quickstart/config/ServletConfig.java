@@ -9,7 +9,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
-@ComponentScan(basePackages = { "package io.github.majortim.quickstart.controller" })
+@ComponentScan(basePackages = { "io.github.majortim.quickstart.controller" })
 public class ServletConfig implements WebMvcConfigurer {
 
   @Override

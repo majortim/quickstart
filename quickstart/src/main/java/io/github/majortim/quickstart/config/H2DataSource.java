@@ -19,8 +19,9 @@ public class H2DataSource {
                 .setType(EmbeddedDatabaseType.H2)
                 .setScriptEncoding("UTF-8")
                 .ignoreFailedDrops(true)
-                .addScript("classpath:database/schema.sql")
-                .addScripts("classpath:database/user_info_data.sql")
+                .addScript("classpath:/database/schema.sql")
+                .addScripts("classpath:/database/user_info_data.sql")
+                .addScripts("classpath:/database/entertainer.sql")
                 .build();
     }
 }

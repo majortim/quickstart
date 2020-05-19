@@ -1,9 +1,7 @@
-package io.github.majortim.quickstart.test.connect;
+package io.github.majortim.quickstart.test.service;
 
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,13 +27,14 @@ public class UserInfoTest {
 	private UserInfoService userInfoService;
 	
 	@Test
-	public void connectTest() throws SQLException {
-		Map<String, Object> param = new HashMap<>();
+	public void userInfoServiceTest() throws SQLException {
 		
-		param.put("userId", "tim");
-		
-		logger.info("userInfoService: {}", userInfoService.getUserInfo(param));
-		logger.info("userInfoService: {}", userInfoService.getUserInfoList());
+		try {
+			logger.info("getUserInfo: {}", userInfoService.getUserInfo("tim"));
+			logger.info("getUserInfoList: {}", userInfoService.getUserInfoList());
+		}catch(Exception ex) {
+			logger.error("error: ", ex);
+		}
 		
 	}
 }

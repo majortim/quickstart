@@ -17,6 +17,7 @@
 		    user_id, user_pw
 		FROM
 		    user_info
+		WHERE 1 = 1
 	</select>
 
 </mapper>

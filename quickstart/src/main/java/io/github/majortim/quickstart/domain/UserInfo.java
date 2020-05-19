@@ -1,8 +1,8 @@
 package io.github.majortim.quickstart.domain;
 
 public class UserInfo {
-	String userId;
-	String userPw;
+	private String userId;
+	private String userPw;
 	
 	public String getUserId() {
 		return userId;

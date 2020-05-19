@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.tbl-solid {
+	width: 80%;
+	border: 1px solid;
+	border-collapse: collapse;
+}
+
+.tbl-solid th, .tbl-solid td {
+	border: 1px solid #444444;
+	text-align: center;
+}

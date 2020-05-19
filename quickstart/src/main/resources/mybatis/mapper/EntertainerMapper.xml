@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.majortim.quickstart.mapper.EntertainerMapper">
+
+	<select id="getEntertainer" resultType="io.github.majortim.quickstart.domain.Entertainer">
+		SELECT 
+		    seq, ent_name, ent_info
+		FROM
+		    entertainer
+		WHERE seq = #{seq}
+	</select>
+	
+	<select id="getEntertainerList" resultType="io.github.majortim.quickstart.domain.Entertainer">
+		SELECT 
+		    seq, ent_name, ent_info
+		FROM
+		    entertainer
+	    <trim prefix="where" prefixOverrides="AND|OR">
+			<if test='searchType != null and searchText != null'>
+				<choose>
+					<when test='searchType eq "name"'>
+						ent_name LIKE '%'||#{searchText}||'%'
+					</when>
+					<when test='searchType eq "info"'>
+						ent_info LIKE '%'||#{searchText}||'%'
+					</when>
+				</choose>
+			</if>
+	    </trim>
+
+
+	</select>
+
+</mapper>
